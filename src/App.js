@@ -2,12 +2,18 @@ import React from 'react';
 import { Menubar} from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-// import { Toast } from 'primereact/toast';
+import toast, { Toaster } from 'react-hot-toast';
 
+// import { Toast } from 'primereact/toast';
 import './App.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+
+const notify = () => toast('Gate Change.');
+const swap = () => toast('Aircraft Swap Happened!');
+
+
 
 const items = [
   {
@@ -43,11 +49,11 @@ const items = [
     ]
   },
   {
-    label:'Potable Water/Lavs',
+    label:'Gate Services',
     icon:'pi pi-fw pi-pencil',
     items:[
       {
-        label:'Left',
+        label:'Potable Water/Lavs',
         icon:'pi pi-fw pi-align-left'
       },
       {
@@ -133,8 +139,8 @@ const items = [
     ]
   },
   {
-    label:'Diversions',
-    icon:'pi pi-fw pi-calendar',
+    label:'Fueling',
+    icon:'pi pi-fw pi-sort-up',
     items:[
       {
         label:'Edit',
@@ -164,11 +170,11 @@ const items = [
     ]
   },
   {
-    label:'Return to Gate',
+    label:'IROPS',
     icon:'pi pi-fw pi-calendar',
     items:[
       {
-        label:'Edit',
+        label:'Diversions',
         icon:'pi pi-fw pi-pencil',
         items:[
           {
@@ -195,7 +201,38 @@ const items = [
     ]
   },
   {
-    label:'Quit',
+    label:'IROPS',
+    icon:'pi pi-fw pi-calendar',
+    items:[
+      {
+        label:'Diversions',
+        icon:'pi pi-fw pi-pencil',
+        items:[
+          {
+            label:'Save',
+            icon:'pi pi-fw pi-calendar-plus'
+          },
+          {
+            label:'Delete',
+            icon:'pi pi-fw pi-calendar-minus'
+          },
+
+        ]
+      },
+      {
+        label:'Archive',
+        icon:'pi pi-fw pi-calendar-times',
+        items:[
+          {
+            label:'Remove',
+            icon:'pi pi-fw pi-calendar-minus'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label:'Misc',
     icon:'pi pi-fw pi-power-off'
   }
 ];
@@ -208,11 +245,15 @@ function App() {
     <div className="App">
       <Menubar
           model={items}
-          start={<InputText placeholder="Flight Search" type="text"/>}
+          start={<InputText placeholder="Quick Flight Search" type="text"/>}
           end={<Button label="Refresh" icon="pi pi-power-off"/>}
       />
 
       <h1>Denver Command Center Communications</h1>
+      <h2>Send Notifications</h2>
+      <button onClick={notify}>Gate Change</button>
+      <button onClick={swap}>Aircraft Swap</button>
+      <Toaster />
     </div>
   );
 }
