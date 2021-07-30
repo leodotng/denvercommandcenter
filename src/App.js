@@ -3,6 +3,12 @@ import { Menubar} from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import toast, { Toaster } from 'react-hot-toast';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 // import { Toast } from 'primereact/toast';
 import './App.css';
@@ -242,6 +248,7 @@ const items = [
 
 function App() {
   return (
+      <Router>
     <div className="App">
       <Menubar
           model={items}
@@ -251,10 +258,11 @@ function App() {
 
       <h1>Denver Command Center Communications</h1>
       <h2>Send Notifications</h2>
-      <button onClick={notify}>Gate Change</button>
+      <Link to="/gatechange"><button onClick={notify}>Gate Change</button></Link>
       <button onClick={swap}>Aircraft Swap</button>
       <Toaster />
     </div>
+      </Router>
   );
 }
 
