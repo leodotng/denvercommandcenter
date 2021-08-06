@@ -99,6 +99,11 @@ const items = [
     label: "IROPS",
     icon: "pi pi-fw pi-calendar",
     items: [
+
+      {
+        label: "Cancellations",
+        icon: "pi pi-fw pi-plus",
+      },
       {
         label: "Diversions",
         icon: "pi pi-fw pi-pencil",
@@ -179,13 +184,13 @@ const items = [
     icon: "pi pi-fw pi-calendar",
     items: [
       {
+        label: "Passdown",
+        icon: "pi pi-fw pi-plus",
+      },
+        {
         label: "Chat",
         icon: "pi pi-fw pi-pencil",
         items: [
-          {
-            label: "Passdown",
-            icon: "pi pi-fw pi-calendar-plus",
-          },
           {
             label: "Delete",
             icon: "pi pi-fw pi-calendar-minus",
@@ -205,7 +210,7 @@ function App() {
           start={<InputText placeholder="Quick Flight Search" type="text" />}
           end={<Button label="Refresh" icon="pi pi-power-off" />}
         />
-        <h2>Command Center Notifications</h2>
+        <h2>Command Center Communications</h2>
         <Link to="/gates">
         <button onClick={notify}>Gates</button>
 
@@ -216,14 +221,14 @@ function App() {
         </Link>
 
         <Link to="/gateservices">
-          <button onClick={notify}>Gate Services</button>
+          <button onClick={notify}>Connections</button>
         </Link>
 
         <Link to="/gateservices">
-          <button onClick={notify}>Gate Services</button>
+          <button onClick={notify}>IROPS</button>
         </Link>
 
-        <button onClick={swap}>Aircraft Swap</button>
+        <button onClick={swap}>Fueling</button>
     
         <Toaster />
      
