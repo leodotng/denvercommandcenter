@@ -1,268 +1,246 @@
-import React from 'react';
-import { Menubar} from 'primereact/menubar';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import toast, { Toaster } from 'react-hot-toast';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
+import React from "react";
+import { Menubar } from "primereact/menubar";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import toast, { Toaster } from "react-hot-toast";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Gates from "./components/Gates";
+import GateServices from "./components/GateServices";
+import CardData from "./components/CardData";
+import { Card } from "primereact/card";
 // import { Toast } from 'primereact/toast';
-import './App.css';
-import 'primereact/resources/themes/saga-blue/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
+import "./App.css";
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
-const notify = () => toast('Gate Change.');
-const swap = () => toast('Aircraft Swap Happened!');
-
-
+const notify = () => toast("Gate Change.");
+const swap = () => toast("Aircraft Swap Happened!");
 
 const items = [
   {
-    label:'Gate Changes',
-    icon:'pi pi-fw pi-file',
-    items:[
+    label: "Gates",
+    icon: "pi pi-fw pi-file",
+    items: [
       {
-        label:'Aircraft Swaps',
-        icon:'pi pi-fw pi-plus',
-        items:[
-          {
-            label:'Bookmark',
-            icon:'pi pi-fw pi-bookmark'
-          },
-          {
-            label:'Video',
-            icon:'pi pi-fw pi-video'
-          },
-
-        ]
+        label: "Gate Changes",
+        icon: "pi pi-fw pi-plus",
       },
       {
-        label:'Potable Water/Lavs',
-        icon:'pi pi-fw pi-trash'
+        label: "Aircraft Swaps",
+        icon: "pi pi-fw pi-trash",
       },
+      // {
+      //   separator:true
+      // },
       {
-        separator:true
+        label: "Tows",
+        icon: "pi pi-fw pi-external-link",
       },
-      {
-        label:'Export',
-        icon:'pi pi-fw pi-external-link'
-      }
-    ]
+    ],
   },
   {
-    label:'Gate Services',
-    icon:'pi pi-fw pi-pencil',
-    items:[
+    label: "Gate Services",
+    icon: "pi pi-fw pi-pencil",
+    items: [
       {
-        label:'Potable Water/Lavs',
-        icon:'pi pi-fw pi-align-left'
+        label: "Water/Lavs",
+        icon: "pi pi-fw pi-align-left",
       },
       {
-        label:'Right',
-        icon:'pi pi-fw pi-align-right'
+        label: "Provo",
+        icon: "pi pi-fw pi-align-left",
       },
-      {
-        label:'Center',
-        icon:'pi pi-fw pi-align-center'
-      },
-      {
-        label:'Justify',
-        icon:'pi pi-fw pi-align-justify'
-      },
-
-    ]
+    ],
   },
   {
-    label:'Delayed Flights',
-    icon:'pi pi-fw pi-sort',
-    items:[
+    label: "Connections",
+    icon: "pi pi-fw pi-sort",
+    items: [
       {
-        label:'New',
-        icon:'pi pi-fw pi-user-plus',
-
+        label: "Delayed Inbounds",
+        icon: "pi pi-fw pi-user-plus",
       },
       {
-        label:'Delete',
-        icon:'pi pi-fw pi-user-minus',
-
+        label: "Hold No Hold",
+        icon: "pi pi-fw pi-user-plus",
       },
       {
-        label:'Search',
-        icon:'pi pi-fw pi-users',
-        items:[
+        label: "Misconnects",
+        icon: "pi pi-fw pi-user-minus",
+      },
+      {
+        label: "Delayed Flights",
+        icon: "pi pi-fw pi-user-minus",
+      },
+      {
+        label: "Search",
+        icon: "pi pi-fw pi-users",
+        items: [
           {
-            label:'Filter',
-            icon:'pi pi-fw pi-filter',
-            items:[
+            label: "Filter",
+            icon: "pi pi-fw pi-filter",
+            items: [
               {
-                label:'Print',
-                icon:'pi pi-fw pi-print'
-              }
-            ]
+                label: "Print",
+                icon: "pi pi-fw pi-print",
+              },
+            ],
           },
           {
-            icon:'pi pi-fw pi-bars',
-            label:'List'
-          }
-        ]
-      }
-    ]
+            icon: "pi pi-fw pi-bars",
+            label: "List",
+          },
+        ],
+      },
+    ],
   },
   {
-    label:'Holdouts',
-    icon:'pi pi-fw pi-calendar',
-    items:[
+    label: "IROPS",
+    icon: "pi pi-fw pi-calendar",
+    items: [
       {
-        label:'Edit',
-        icon:'pi pi-fw pi-pencil',
-        items:[
+        label: "Diversions",
+        icon: "pi pi-fw pi-pencil",
+        items: [
           {
-            label:'Save',
-            icon:'pi pi-fw pi-calendar-plus'
+            label: "Delayed Flights",
+            icon: "pi pi-fw pi-calendar-plus",
           },
           {
-            label:'Delete',
-            icon:'pi pi-fw pi-calendar-minus'
+            label: "De-icing Metering",
+            icon: "pi pi-fw pi-calendar-minus",
           },
-
-        ]
+          {
+            label: "Crew Scheduling",
+            icon: "pi pi-fw pi-calendar-minus",
+          },
+          {
+            label: "YTs/UM",
+            icon: "pi pi-fw pi-calendar-minus",
+          },
+          {
+            label: "Holdouts",
+            icon: "pi pi-fw pi-calendar-minus",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Fueling",
+    icon: "pi pi-fw pi-sort-up",
+    items: [
+      {
+        label: "Uplifts",
+        icon: "pi pi-fw pi-pencil",
+        items: [
+          {
+            label: "Walk The Line",
+            icon: "pi pi-fw pi-calendar-plus",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Technology",
+    icon: "pi pi-fw pi-calendar",
+    items: [
+      {
+        label: "Computers",
+        icon: "pi pi-fw pi-pencil",
+        items: [
+          {
+            label: "Save",
+            icon: "pi pi-fw pi-calendar-plus",
+          },
+          {
+            label: "Delete",
+            icon: "pi pi-fw pi-calendar-minus",
+          },
+        ],
       },
       {
-        label:'Archive',
-        icon:'pi pi-fw pi-calendar-times',
-        items:[
+        label: "Jetbridges",
+        icon: "pi pi-fw pi-calendar-times",
+        items: [
           {
-            label:'Remove',
-            icon:'pi pi-fw pi-calendar-minus'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label:'Fueling',
-    icon:'pi pi-fw pi-sort-up',
-    items:[
-      {
-        label:'Edit',
-        icon:'pi pi-fw pi-pencil',
-        items:[
-          {
-            label:'Save',
-            icon:'pi pi-fw pi-calendar-plus'
+            label: "Remove",
+            icon: "pi pi-fw pi-calendar-minus",
           },
-          {
-            label:'Delete',
-            icon:'pi pi-fw pi-calendar-minus'
-          },
-
-        ]
+        ],
       },
-      {
-        label:'Archive',
-        icon:'pi pi-fw pi-calendar-times',
-        items:[
-          {
-            label:'Remove',
-            icon:'pi pi-fw pi-calendar-minus'
-          }
-        ]
-      }
-    ]
+    ],
   },
-  {
-    label:'IROPS',
-    icon:'pi pi-fw pi-calendar',
-    items:[
-      {
-        label:'Diversions',
-        icon:'pi pi-fw pi-pencil',
-        items:[
-          {
-            label:'Save',
-            icon:'pi pi-fw pi-calendar-plus'
-          },
-          {
-            label:'Delete',
-            icon:'pi pi-fw pi-calendar-minus'
-          },
 
-        ]
-      },
-      {
-        label:'Archive',
-        icon:'pi pi-fw pi-calendar-times',
-        items:[
-          {
-            label:'Remove',
-            icon:'pi pi-fw pi-calendar-minus'
-          }
-        ]
-      }
-    ]
-  },
   {
-    label:'IROPS',
-    icon:'pi pi-fw pi-calendar',
-    items:[
+    label: "Communication",
+    icon: "pi pi-fw pi-calendar",
+    items: [
       {
-        label:'Diversions',
-        icon:'pi pi-fw pi-pencil',
-        items:[
+        label: "Chat",
+        icon: "pi pi-fw pi-pencil",
+        items: [
           {
-            label:'Save',
-            icon:'pi pi-fw pi-calendar-plus'
+            label: "Passdown",
+            icon: "pi pi-fw pi-calendar-plus",
           },
           {
-            label:'Delete',
-            icon:'pi pi-fw pi-calendar-minus'
+            label: "Delete",
+            icon: "pi pi-fw pi-calendar-minus",
           },
-
-        ]
+        ],
       },
-      {
-        label:'Archive',
-        icon:'pi pi-fw pi-calendar-times',
-        items:[
-          {
-            label:'Remove',
-            icon:'pi pi-fw pi-calendar-minus'
-          }
-        ]
-      }
-    ]
+    ],
   },
-  {
-    label:'Misc',
-    icon:'pi pi-fw pi-power-off'
-  }
 ];
-
-
-
 
 function App() {
   return (
-      <Router>
-    <div className="App">
-      <Menubar
+    <Router>
+      <div className="App">
+        <Menubar
           model={items}
-          start={<InputText placeholder="Quick Flight Search" type="text"/>}
-          end={<Button label="Refresh" icon="pi pi-power-off"/>}
-      />
+          start={<InputText placeholder="Quick Flight Search" type="text" />}
+          end={<Button label="Refresh" icon="pi pi-power-off" />}
+        />
+        <h2>Command Center Notifications</h2>
+        <Link to="/gates">
+        <button onClick={notify}>Gates</button>
 
-      <h1>Denver Command Center Communications</h1>
-      <h2>Send Notifications</h2>
-      <Link to="/gatechange"><button onClick={notify}>Gate Change</button></Link>
-      <button onClick={swap}>Aircraft Swap</button>
-      <Toaster />
-    </div>
-      </Router>
+        </Link>
+
+        <Link to="/gateservices">
+          <button onClick={notify}>Gate Services</button>
+        </Link>
+
+        <Link to="/gateservices">
+          <button onClick={notify}>Gate Services</button>
+        </Link>
+
+        <Link to="/gateservices">
+          <button onClick={notify}>Gate Services</button>
+        </Link>
+
+        <button onClick={swap}>Aircraft Swap</button>
+    
+        <Toaster />
+     
+        </div>
+      <Switch>
+        <Route path="/gatechanges">
+          <Gates />
+        </Route>
+        <Route path="/gateservices">
+          <GateServices />
+        </Route>
+        <Route path="/gateservices">
+          <GateServices />
+        </Route>
+      </Switch>
+      
+    </Router>
   );
 }
 

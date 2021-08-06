@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import PrimeReact from 'primereact/api';
+import { BrowserRouter } from "react-router-dom";
 
 PrimeReact.ripple = true;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
