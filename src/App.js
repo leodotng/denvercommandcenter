@@ -8,11 +8,32 @@ import Gates from "./components/Gates";
 import GateServices from "./components/GateServices";
 import CardData from "./components/CardData";
 import { Card } from "primereact/card";
-// import { Toast } from 'primereact/toast';
+import {InputSwitch} from 'primereact/inputswitch';
 import "./App.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
+import logo from "./logo.png";
+
+console.log(logo);
+
+
+
+const header = (
+  <img
+    alt="Card"
+    src="https://t4.ftcdn.net/jpg/02/76/08/07/360_F_276080724_hltnCyDjcqAyRtLzDYo3T2jXbBtCD7fl.jpg"
+    height="75px"
+    width="250px"
+  />
+);
+const footer = (
+  <span>
+    <Button label="Save" icon="pi pi-check" style={{ marginRight: ".25em" }} />
+    <Button label="Cancel" icon="pi pi-times" className="p-button-secondary" />
+  </span>
+);
 
 const notify = () => toast("Gate Change.");
 const swap = () => toast("Aircraft Swap Happened!");
@@ -99,7 +120,6 @@ const items = [
     label: "IROPS",
     icon: "pi pi-fw pi-calendar",
     items: [
-
       {
         label: "Cancellations",
         icon: "pi pi-fw pi-plus",
@@ -187,7 +207,7 @@ const items = [
         label: "Passdown",
         icon: "pi pi-fw pi-plus",
       },
-        {
+      {
         label: "Chat",
         icon: "pi pi-fw pi-pencil",
         items: [
@@ -197,54 +217,139 @@ const items = [
           },
         ],
       },
+      {
+        label: "Settings",
+        icon: "pi-cog",
+      },
     ],
   },
 ];
 
 function App() {
+  
   return (
     <Router>
-      <div className="App">
-        <Menubar
-          model={items}
-          start={<InputText placeholder="Quick Flight Search" type="text" />}
-          end={<Button label="Refresh" icon="pi pi-power-off" />}
-        />
-        <h2>Command Center Communications</h2>
-        <Link to="/gates">
-        <button onClick={notify}>Gates</button>
+      <Menubar
+        model={items}
+        start={
+          <>
+            <img src={logo} alt="Logo" className="logo-size" />
+          </>
+        }
+        end={
+          <>
+            <Button
+              label="Settings"
+              icon="pi pi-cog"
+              style={{ marginRight: ".25em" }}
+            />
+            <Button label="Sign In" icon="pi pi-sign-in" />
+          </>
+        }
+      />
 
-        </Link>
+      <div className="">
+        <div class="flex align-items-center justify-content-center">
+          <InputText
+            placeholder="Quick Flight Search"
+            type="text"
+            style={{ marginRight: ".25em" }}
+          />
+          <Button
+            label="Search"
+            icon="pi pi-search"
+            style={{ marginRight: ".25em" }}
+          />
+          <Link to="/gates" className="text-link">
+            <Button
+              onClick={notify}
+              style={{ marginRight: ".25em" }}
+              className="p-m-2"
+            >
+              Gates
+            </Button>
+          </Link>
 
-        <Link to="/gateservices">
-          <button onClick={notify}>Gate Services</button>
-        </Link>
+          <Link to="/gateservices" className="text-link">
+            <Button
+              onClick={notify}
+              style={{ marginRight: ".25em" }}
+              className="p-m-2"
+            >
+              Gate Services
+            </Button>
+          </Link>
+          <Link to="/gateservices" className="text-link">
+            <Button
+              onClick={notify}
+              style={{ marginRight: ".25em" }}
+              className="p-m-2"
+            >
+              Connections
+            </Button>
+          </Link>
 
-        <Link to="/gateservices">
-          <button onClick={notify}>Connections</button>
-        </Link>
-
-        <Link to="/gateservices">
-          <button onClick={notify}>IROPS</button>
-        </Link>
-
-        <button onClick={swap}>Fueling</button>
-    
-        <Toaster />
-     
+          <Link to="/gateservices" className="text-link">
+            <Button
+              onClick={notify}
+              style={{ marginRight: ".25em" }}
+              className=""
+            >
+              IROPS
+            </Button>
+          </Link>
+          <Link to="/Fueling" className="text-link">
+            <Button
+              onClick={notify}
+              style={{ marginRight: ".25em" }}
+              className="p-m-2"
+            >
+              Fueling
+            </Button>
+          </Link>
         </div>
-      <Switch>
-        <Route path="/gatechanges">
-          <Gates />
-        </Route>
-        <Route path="/gateservices">
-          <GateServices />
-        </Route>
-        <Route path="/gateservices">
-          <GateServices />
-        </Route>
-      </Switch>
-      
+        <div></div>
+        <div></div>
+        <div>
+          <Card
+            style={{ marginBottom: ".5em" }}
+            footer={footer}
+            header={header}
+            title="Gates"
+            subTitle="Gates Subtitle"
+          >
+            {/* <InputSwitch checked={value} onChange={(e) => setValue(e.value)} /> */}
+          </Card>
+          <Card
+            style={{ marginBottom: ".5em" }}
+            footer={footer}
+            header={header}
+          >
+            Gate Services
+          </Card>
+
+          <Card style={{ marginBottom: ".5em" }}>Connections</Card>
+          <Card style={{ marginBottom: ".5em" }}>IROPS</Card>
+          <Card style={{ marginBottom: ".5em" }}>Fueling</Card>
+
+          <Card style={{ marginBottom: ".5em" }}>Technology</Card>
+          <Card style={{ marginBottom: ".5em" }}>Communication</Card>
+        </div>
+
+        <Toaster />
+
+        <Switch>
+          <Route path="/gatechanges">
+            <Gates />
+          </Route>
+          <Route path="/gateservices">
+            <GateServices />
+          </Route>
+          <Route path="/gateservices">
+            <GateServices />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }
