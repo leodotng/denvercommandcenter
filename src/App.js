@@ -8,17 +8,15 @@ import Gates from "./components/Gates";
 import GateServices from "./components/GateServices";
 import CardData from "./components/CardData";
 import { Card } from "primereact/card";
-import {InputSwitch} from 'primereact/inputswitch';
+import { Panel } from "primereact/panel";
+import { Dropdown } from 'primereact/dropdown';
 import "./App.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import logo from "./logo.png";
-
-console.log(logo);
-
-
+import ToggleStatus from "./components/ToggleStatus";
 
 const header = (
   <img
@@ -34,6 +32,14 @@ const footer = (
     <Button label="Cancel" icon="pi pi-times" className="p-button-secondary" />
   </span>
 );
+
+const cities = [
+  {label: 'Aircraft Maintenance', value: 'ACMX'},
+  {label: 'Extended Holdout', value: 'HOLD'},
+  {label: 'Gate Conflict', value: 'CONFLICT'},
+  {label: 'Inbound Connections', value: 'CONX'},
+  {label: 'OTHER', value: 'OTHER'}
+];
 
 const notify = () => toast("Gate Change.");
 const swap = () => toast("Aircraft Swap Happened!");
@@ -217,16 +223,12 @@ const items = [
           },
         ],
       },
-      {
-        label: "Settings",
-        icon: "pi-cog",
-      },
+      
     ],
   },
 ];
 
 function App() {
-  
   return (
     <Router>
       <Menubar
@@ -248,22 +250,21 @@ function App() {
         }
       />
 
-      <div className="">
+      <div className="p-grid p-justify-center">
         <div class="flex align-items-center justify-content-center">
-          <InputText
-            placeholder="Quick Flight Search"
-            type="text"
-            style={{ marginRight: ".25em" }}
-          />
-          <Button
-            label="Search"
-            icon="pi pi-search"
-            style={{ marginRight: ".25em" }}
-          />
+          <Link to="/" className="text-link">
+            <Button
+              onClick={notify}
+              // style={{ marginRight: ".25em" }}
+              className="p-m-2"
+            >
+              Home
+            </Button>
+          </Link>
           <Link to="/gates" className="text-link">
             <Button
               onClick={notify}
-              style={{ marginRight: ".25em" }}
+              // style={{ marginRight: ".25em" }}
               className="p-m-2"
             >
               Gates
@@ -273,7 +274,7 @@ function App() {
           <Link to="/gateservices" className="text-link">
             <Button
               onClick={notify}
-              style={{ marginRight: ".25em" }}
+              // style={{ marginRight: ".25em" }}
               className="p-m-2"
             >
               Gate Services
@@ -282,7 +283,7 @@ function App() {
           <Link to="/gateservices" className="text-link">
             <Button
               onClick={notify}
-              style={{ marginRight: ".25em" }}
+              // style={{ marginRight: ".25em" }}
               className="p-m-2"
             >
               Connections
@@ -292,8 +293,8 @@ function App() {
           <Link to="/gateservices" className="text-link">
             <Button
               onClick={notify}
-              style={{ marginRight: ".25em" }}
-              className=""
+              // style={{ marginRight: ".25em" }}
+              className="p-m-2"
             >
               IROPS
             </Button>
@@ -307,33 +308,129 @@ function App() {
               Fueling
             </Button>
           </Link>
+          <InputText
+            placeholder="Quick Flight Search"
+            type="text"
+            style={{ marginRight: ".25em" }}
+          />
+          <Button
+            label="Search"
+            icon="pi pi-search"
+            style={{ marginRight: ".25em" }}
+          />
         </div>
         <div></div>
-        <div></div>
-        <div>
-          <Card
-            style={{ marginBottom: ".5em" }}
-            footer={footer}
-            header={header}
-            title="Gates"
-            subTitle="Gates Subtitle"
-          >
-            {/* <InputSwitch checked={value} onChange={(e) => setValue(e.value)} /> */}
-          </Card>
-          <Card
-            style={{ marginBottom: ".5em" }}
-            footer={footer}
-            header={header}
-          >
-            Gate Services
-          </Card>
 
-          <Card style={{ marginBottom: ".5em" }}>Connections</Card>
-          <Card style={{ marginBottom: ".5em" }}>IROPS</Card>
-          <Card style={{ marginBottom: ".5em" }}>Fueling</Card>
+        <div className=""><h1>Gate Changes</h1></div>
 
-          <Card style={{ marginBottom: ".5em" }}>Technology</Card>
-          <Card style={{ marginBottom: ".5em" }}>Communication</Card>
+        {/* Card Beginning */}
+        <div className="p-grid p-dir">
+          <div className="p-col-12 p-md-6 p-lg-3">
+            <Card style={{ marginBottom: ".5em" }} footer={footer}>
+              <Panel header="Gates Changes">
+                <p>
+History of all gate changes                 
+                </p>
+                <span className="p-float-label">
+                  Gate<br />
+                <InputText id="Gate" label="Gate"/><br />
+                City<br />
+                <InputText id="Gate" label="Gate"/><br />
+                Origin Gate<br />
+                <InputText id="Gate" label="Gate"/><br />
+                New Gate<br />
+                <InputText id="Gate" label="Gate"/><br />
+                Time<br />
+                <InputText id="Gate" label="Gate"/><br />
+                
+                Reason<br />
+                {/* <Dropdown options={this.cities} onChange={this.onCityChange} optionLabel="name" placeholder="Select a City" /> */}
+                </span>
+
+              </Panel>
+            </Card>
+          </div>
+          <div className="p-col-12 p-md-6 p-lg-3">
+            <Card style={{ marginBottom: ".5em" }} footer={footer}>
+              <Panel header="Gate Services">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+              </Panel>
+            </Card>
+          </div>
+          <div className="p-col-12 p-md-6 p-lg-3">
+            <Card style={{ marginBottom: ".5em" }}>
+              <Panel header="Connections">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+              </Panel>
+            </Card>
+          </div>
+          <div className="p-col-12 p-md-6 p-lg-3">
+            <Card style={{ marginBottom: ".5em" }}>
+              <Panel header="IROPS">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  
+                  <ToggleStatus />
+
+                </p>
+              </Panel>
+            </Card>
+          </div>
+          <div className="p-col-12 p-md-6 p-lg-3">
+            <Card style={{ marginBottom: ".5em" }}><Panel header="Fueling">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+              </Panel></Card>
+          </div>
+          <div className="p-col-12 p-md-6 p-lg-3">
+            <Card style={{ marginBottom: ".5em" }}><Panel header="Technology">
+                <p>
+                  C23
+                </p>
+              </Panel></Card>
+          </div>
+          <div className="p-col-12 p-md-6 p-lg-3">
+            <Card style={{ marginBottom: ".5em" }}><Panel header="Communication">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </p>
+              </Panel></Card>
+          </div>
         </div>
 
         <Toaster />
